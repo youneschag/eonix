@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,7 +11,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 2), () async {
-      Navigator.pushReplacementNamed(context, '/login');
+      //Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/home', arguments: "username");
     });
   }
 

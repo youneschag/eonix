@@ -1,13 +1,22 @@
+import 'package:eonix/screens/order_screen.dart';
+import 'package:eonix/screens/stock_detail_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:eonix/pages/splash_screen.dart';
-import 'package:eonix/pages/login_page.dart';
-import 'package:eonix/pages/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:eonix/providers/market_provider.dart';
+import 'package:eonix/acces_pages/splash_screen.dart';
+import 'package:eonix/acces_pages/login_page.dart';
+import 'package:eonix/acces_pages/home_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => MarketProvider(),
+      child: EonixApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class EonixApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,6 +34,21 @@ class MyApp extends StatelessWidget {
         if (settings.name == '/home') {
           final userName = settings.arguments as String;
           return MaterialPageRoute(builder: (_) => HomePage(userName: userName));
+        }
+        if (settings.name == '/detail') {
+          final args = settings.arguments as Map<String, dynamic>;
+          final symbol = args['symbol'] as String;
+          return MaterialPageRoute(
+            builder: (_) => StockDetailScreen(symbol: symbol),
+          );
+        }
+        if (settings.name == '/order') {
+          final args = settings.arguments as Map<String, dynamic>;
+          final symbol = args['symbol'] as String;
+          // Remplace OrderScreen par le nom réel de ton écran de passage d'ordre
+          return MaterialPageRoute(
+            builder: (_) => OrderScreen(symbol: symbol),
+          );
         }
         return null;
       },

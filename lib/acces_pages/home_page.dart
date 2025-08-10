@@ -1,7 +1,6 @@
+import 'package:eonix/home_screens/overview_screen.dart';
+import 'package:eonix/screens/market_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:eonix/models/compte.dart';
-import 'dart:math';
 
 class HomePage extends StatefulWidget {
   final String userName;
@@ -20,29 +19,29 @@ class _HomePageState extends State<HomePage> {
     userName = widget.userName;
   }
 
-  int selectedMenuIndex = 0; // 0: Vue d'ensemble, 1: Analyse, 2: Notifications, 3: Paramètres
+  int selectedMenuIndex = 0;
 
   final List<String> menuTitles = [
     "Vue d'ensemble",
+    "Bourse",
     "Analyse",
-    "Notifications",
     "Paramètres"
   ];
   final List<IconData> menuIcons = [
     Icons.dashboard,
+    Icons.show_chart,
     Icons.analytics,
-    Icons.notifications,
     Icons.settings
   ];
 
-    Widget _buildContent() {
+  Widget _buildContent() {
     switch (selectedMenuIndex) {
       case 0:
-        return Center(child: Text("Bienvenue sur la vue d'ensemble !"));
+        return OverviewScreen(); // Affiche la vue d'ensemble
       case 1:
-        return Center(child: Text("Analyse"));
+        return MarketListScreen(); // Affiche la liste des marchés dans la vue d'ensemble
       case 2:
-        return Center(child: Text("Notifications"));
+        return Center(child: Text("Analyse"));
       case 3:
         return Center(child: Text("Paramètres"));
       default:
